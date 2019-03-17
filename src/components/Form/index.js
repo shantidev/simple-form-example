@@ -7,6 +7,11 @@ import TextInput from '../../ui/TextInput';
 const Form = props => {
   const { form } = props;
 
+  const onClickMock = e => {
+    e.preventDefault();
+    form.onSubmit();
+  };
+
   return (
     <UI.FormContainer>
       <UI.FormRow>
@@ -17,7 +22,7 @@ const Form = props => {
           label="Ваше имя"
         />
       </UI.FormRow>
-      <button onClick={form.onSubmit}>BUTTON</button>
+      <button onClick={onClickMock}>BUTTON</button>
     </UI.FormContainer>
   )
 };
