@@ -1,4 +1,5 @@
-@import './sanitize.css';
+/* Optional */
+/*@import './sanitize.css';*/
 @import '~reset-css/reset.css';
 @import './fonts.css';
 @import './scaffolding.css';
