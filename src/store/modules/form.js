@@ -1,3 +1,5 @@
+import * as api from '../../api/form';
+
 export const REQUEST = 'FORM/REQUEST';
 export const RECEIVE = 'FORM/RECEIVE';
 export const REJECT = 'FORM/REJECT';
@@ -14,11 +16,10 @@ export const getFormData = () => async (dispatch, getState) => {
 
   try {
     dispatch({ type: REQUEST });
-    // await api.get ...
-    const payload = {name: 'Alexander'};
+    const payload = await api.getFormData();
 
     dispatch({ type: RECEIVE });
-    dispatch({type: SUCCESS_SAVE_FORM_DATA, formData: payload})
+    dispatch({ type: SUCCESS_SAVE_FORM_DATA, formData: payload })
   } catch (err) {
     console.error(err);
     dispatch({ type: REJECT });
@@ -38,7 +39,7 @@ export const reducer = (state = initialState, action) => {
     case REJECT:
       return { ...initialState, formData: state.formData || {} };
     case SUCCESS_SAVE_FORM_DATA:
-      return { ...state, formData: action.formData};
+      return { ...state, formData: action.formData };
     default:
       return state;
   }
