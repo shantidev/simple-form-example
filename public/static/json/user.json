@@ -3,12 +3,12 @@
     "status": "SUCCESS",
     "results": {
       "id": 123456789,
-      "login": "vasilevich@mail.com",
-      "fullName": "Ivan Vasilevich",
+      "login": "grozny@mail.com",
+      "fullName": "Ivan IV Vasilevich",
       "phone": 71234567890,
-      "address": "Not a house and not a street",
+      "address": "Moscow",
       "gender": "male",
-      "age": 48,
+      "age": 53,
       "about": "Ivan the Terrible - commonly known as Ivan the Terrible, was the Grand Prince of Moscow from 1533 to 1547 and the first Tsar of Russia from 1547 to 1584."
     }
   }
