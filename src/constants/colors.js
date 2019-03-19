@@ -1,0 +1,15 @@
+export default {
+  transparent: 'rgba(255, 255, 255, 0)',
+  whiteRGB: '255, 255, 255',
+  dark : '#06394C',
+  light: '#EFF8F8',
+  silver: '#D6D6D6',
+  greyLight: '#959595',
+  grey: '#505050',
+  graphite: '#071E26',
+  error: '#EE2F50',
+  marineDark: '#008B83',
+  marineBright: '#00C2B8',
+  marineLight: '#00F9EB',
+  marineUltraLight: '#AFFFF7',
+};

@@ -15,14 +15,62 @@ const Form = props => {
   return (
     <UI.FormContainer>
       <UI.FormRow>
-        <TextInput
-          name={form.fields.name.name}
-          value={form.fields.name.value}
-          change={form.onChange}
-          label="Ваше имя"
-        />
+        <UI.FormField>
+          <TextInput
+            name={form.fields.name.name}
+            value={form.fields.name.value}
+            change={form.onChange}
+            label="Hero name"
+          />
+        </UI.FormField>
+        <UI.FormField>
+          <TextInput
+            name={form.fields.name.name}
+            value={form.fields.name.value}
+            change={form.onChange}
+            label="Race"
+          />
+        </UI.FormField>
       </UI.FormRow>
-      <button onClick={onClickMock}>BUTTON</button>
+      <UI.FormRow>
+        <UI.FormField>
+          <TextInput
+            name={form.fields.name.name}
+            value={form.fields.name.value}
+            change={form.onChange}
+            label="Class"
+          />
+        </UI.FormField>
+        <UI.FormField>
+          <TextInput
+            name={form.fields.name.name}
+            value={form.fields.name.value}
+            change={form.onChange}
+            label="Start weapon"
+          />
+        </UI.FormField>
+      </UI.FormRow>
+      <UI.FormRow>
+        <UI.FormField>
+          <TextInput
+            name={form.fields.name.name}
+            value={form.fields.name.value}
+            change={form.onChange}
+            label="Little history"
+          />
+        </UI.FormField>
+      </UI.FormRow>
+      <UI.FormRow>
+        <UI.FormField>
+          <TextInput
+            name={form.fields.name.name}
+            value={form.fields.name.value}
+            change={form.onChange}
+            label="Hero photo"
+          />
+        </UI.FormField>
+      </UI.FormRow>
+      <button onClick={onClickMock}>START GAME</button>
     </UI.FormContainer>
   )
 };

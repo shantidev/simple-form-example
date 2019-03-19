@@ -1,5 +1,5 @@
 import styled from "styled-components";
-// import colors from "../../constants/colors";
+import colors from "../../constants/colors";
 
 /**
  * Styles are calculated automatically!
@@ -7,9 +7,9 @@ import styled from "styled-components";
  */
 
 const heights = {
-  valueHeight: 26,
-  smallHeight: 20,
-  borderHeight: 1
+  valueHeight: 24,
+  smallHeight: 28,
+  borderHeight: 2
 };
 
 const indents = {
@@ -22,11 +22,15 @@ const typography = {
   valueLineHeight: heights.valueHeight,
   smallFontSize: 12,
   smallLineHeight: heights.smallHeight,
-  focusValueColor: '#000000',//colors.dark,
-  unFocusValueColor: '#BEBEBE',//colors.deepGrey,
-  errorColor: '#FF0000',//colors.red,
-  focusBorderColor: '#00FF2E',//colors.accentGreen,
-  unFocusBorderColor: '#BEBEBE',//colors.lightGrey
+  focusValueColor: colors.marineUltraLight,
+  unFocusValueColor: colors.marineBright,
+  focusValueShadow: 2,
+  unFocusValueShadow: 2,
+  errorColor: colors.error,
+  focusBorderColor: colors.marineUltraLight,
+  unFocusBorderColor: colors.marineBright,
+  focusBorderShadow: 6,
+  unFocusBorderShadow: 2,
 };
 
 const wrapperHeight =
@@ -63,6 +67,7 @@ export const InputWrapper = styled.div`
     width: 100%;
     background-color: ${props =>
       props.invalid ? typography.errorColor : typography.unFocusBorderColor};
+    box-shadow: ${props => props.invalid ? 'none' : `0 0 ${typography.unFocusBorderShadow}px ${typography.unFocusBorderColor}`};
   }
 
   &::after {
@@ -74,9 +79,11 @@ export const InputWrapper = styled.div`
     width: 100%;
     background-color: ${props =>
       props.invalid ? typography.errorColor : typography.focusBorderColor};
-    transform: scaleX(${props => (props.focus ? 1 : 0)});
-    transform-origin: 0 0;
-    transition: all ease-in-out 0.3s;
+    box-shadow: ${props => props.invalid ? 'none' : `0 0 ${typography.focusBorderShadow}px ${typography.focusBorderColor}`};
+    opacity: ${props => (props.focus ? 1 : 0)};
+    // transform: scaleX(${props => (props.focus ? 1 : 0)});
+    // transform-origin: 0 0;
+    transition: all ease-in-out 0.4s;
   }
 `;
 
@@ -113,6 +120,8 @@ export const InputLabel = styled.label`
     props.focus ? typography.smallFontSize : typography.valueFontSize}px;
   line-height: ${props =>
     props.focus ? typography.smallLineHeight : typography.valueLineHeight}px;
+  text-shadow: 0 0 ${typography.unFocusValueShadow}px ${typography.unFocusValueColor};
+  text-transform: uppercase;
   color: ${typography.unFocusValueColor};
   transition: all ease-in-out 0.3s;
   cursor: text;
@@ -124,9 +133,18 @@ export const Input = styled.input`
   height: ${heights.valueHeight}px;
   font-size: ${typography.valueFontSize}px;
   line-height: ${typography.valueLineHeight}px;
-
+  color: ${typography.unFocusValueColor};
+  text-shadow: 0 0 ${typography.unFocusValueShadow}px ${typography.unFocusValueColor};
+  transition: all ease-in-out 0.4s;
+  
   /* For unset default input styles */
+  padding: 0;
   outline: none;
   border: none;
   z-index: 1;
+  
+  &:focus {
+    color: ${typography.focusValueColor};
+    text-shadow: 0 0 ${typography.focusValueShadow}px ${typography.focusValueColor};
+  }
 `;
