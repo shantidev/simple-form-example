@@ -47,6 +47,9 @@ const blinkingPulse = keyframes`
   0% {
     opacity: 0;
   }
+  39% {
+    opacity: 0;
+  }
   40% {
     opacity: 1;
   }
