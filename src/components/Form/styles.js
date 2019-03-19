@@ -13,6 +13,7 @@ export const FormRow = styled.div`
 export const FormField = styled.div`
   width: 100%;
   margin-right: 40px;
+  font-family: 'Raleway', sans-serif;
   
   &:last-child {
     margin-right: 0;
