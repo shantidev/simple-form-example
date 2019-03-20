@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import * as UI from './styles';
 
 import TextInput from '../../ui/TextInput';
+import Button from '../../ui/Button';
 
 const Form = props => {
   const { form } = props;
 
-  const onClickMock = e => {
-    e.preventDefault();
+  const onClickMock = () => {
     form.onSubmit();
   };
 
@@ -70,7 +70,7 @@ const Form = props => {
           />
         </UI.FormField>
       </UI.FormRow>
-      <button onClick={onClickMock}>START GAME</button>
+      <Button styleType="hold" onClick={onClickMock}>START GAME</Button>
     </UI.FormContainer>
   )
 };

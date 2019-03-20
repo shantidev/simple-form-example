@@ -1,4 +1,4 @@
-import styled, {keyframes, css} from "styled-components";
+import styled from "styled-components";
 import colors from "../../constants/colors";
 
 /**
@@ -41,36 +41,6 @@ const wrapperHeight =
 const containerHeight =
   wrapperHeight + heights.smallHeight + indents.errorMarginTop;
 
-/* Animation for border */
-
-const blinkingPulse = keyframes`
-  0% {
-    opacity: 0;
-  }
-  39% {
-    opacity: 0;
-  }
-  40% {
-    opacity: 1;
-  }
-  45% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  55% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-`;
-
-const borderAnimation = () => css`
-  ${blinkingPulse} 1s linear 1;
-`;
-
 export const InputContainer = styled.div`
   height: ${containerHeight}px;
   width: 100%;
@@ -111,10 +81,9 @@ export const InputWrapper = styled.div`
       props.invalid ? typography.errorColor : typography.focusBorderColor};
     box-shadow: ${props => props.invalid ? 'none' : `0 0 ${typography.focusBorderShadow}px ${typography.focusBorderColor}`};
     opacity: ${props => (props.focus ? 1 : 0)};
-    
-    ${props => props.focus && css`
-      animation: ${borderAnimation};
-    `}
+    transform: scaleX(${props => (props.focus ? 1 : 0)});
+    transform-origin: 0 0;
+    transition: all ease-in-out 0.3s;
   }
 `;
 

@@ -2,44 +2,28 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import DefaultButton from './components/DefaultButton';
-import SmallButton from './components/SmallButton';
+import HoldButton from './components/HoldButton';
 
 const Button = props => {
-  const { onClick, disabled, type, children } = props;
+  const { onClick, disabled, styleType, children } = props;
 
   const getButtonOfType = () => {
     const typesMap = new Map([
       [
         'default',
         () => (
-          <DefaultButton type="default" disabled={disabled} onClick={onClick}>
+          <DefaultButton disabled={disabled} onClick={onClick}>
             {children}
           </DefaultButton>
         )
       ],
       [
-        'transparent',
-        () => (
-          <DefaultButton
-            type="transparent"
-            disabled={disabled}
-            onClick={onClick}
-          >
-            {children}
-          </DefaultButton>
-        )
-      ],
-      [
-        'small',
-        () => (
-          <SmallButton disabled={disabled} onClick={onClick}>
-            {children}
-          </SmallButton>
-        )
+        'hold',
+        () => (<HoldButton onClick={onClick}/>)
       ]
     ]);
 
-    return typesMap.get(type)();
+    return typesMap.get(styleType)();
   };
 
   return <Fragment>{getButtonOfType()}</Fragment>;
@@ -48,11 +32,11 @@ const Button = props => {
 Button.propTypes = {
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
-  type: PropTypes.oneOf(['default', 'transparent', 'small'])
+  styleType: PropTypes.oneOf(['default', 'hold'])
 };
 
 Button.defaultProps = {
-  type: 'default'
+  styleType: 'default'
 };
 
 export default Button;
