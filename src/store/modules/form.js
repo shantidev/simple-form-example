@@ -20,14 +20,26 @@ export const getFormData = () => async (dispatch, getState) => {
 
     dispatch({ type: RECEIVE });
     dispatch({ type: SUCCESS_SAVE_FORM_DATA, formData: payload })
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error(error);
     dispatch({ type: REJECT });
   }
 };
 
 export const submitForm = payload => async (dispatch, getState) => {
+  const { loading } = getState().form;
+  if (loading) return;
 
+  try {
+    dispatch({ type: REQUEST });
+    console.log('Submit form data...', payload);
+    alert(`Hello, ${payload.name}`);
+
+    dispatch({ type: RECEIVE });
+  } catch (error) {
+    console.error(error);
+    dispatch({ type: REJECT });
+  }
 };
 
 export const reducer = (state = initialState, action) => {

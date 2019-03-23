@@ -19,3 +19,7 @@ export const FormField = styled.div`
     margin-right: 0;
   }
 `;
+
+export const FormTitle = {
+  marginBottom: '40px',
+};

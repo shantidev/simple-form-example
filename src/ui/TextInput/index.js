@@ -32,7 +32,7 @@ const TextInput = React.forwardRef((props, ref) => {
   return (
     <UI.InputContainer>
       <UI.InputWrapper focus={focus.default} invalid={invalid}>
-        <UI.InputLabel focus={focus.custom}>
+        <UI.InputLabel focus={focus.custom} invalid={invalid}>
           {label}
         </UI.InputLabel>
         <UI.Input

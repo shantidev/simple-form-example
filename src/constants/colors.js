@@ -10,6 +10,7 @@ export default {
   error: '#EE2F50',
   marineDark: '#008B83',
   marineBright: '#00C2B8',
+  marineBrightRGB: '175, 255, 247',
   marineLight: '#00F9EB',
   marineUltraLight: '#AFFFF7',
 };

@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import colors from "../../constants/colors";
+import styled, { css } from 'styled-components';
+import colors from '../../constants/colors';
 
 /**
  * Styles are calculated automatically!
@@ -66,7 +66,7 @@ export const InputWrapper = styled.div`
     height: ${heights.borderHeight}px;
     width: 100%;
     background-color: ${props =>
-      props.invalid ? typography.errorColor : typography.unFocusBorderColor};
+  props.invalid ? typography.errorColor : typography.unFocusBorderColor};
     box-shadow: ${props => props.invalid ? 'none' : `0 0 ${typography.unFocusBorderShadow}px ${typography.unFocusBorderColor}`};
   }
 
@@ -78,7 +78,7 @@ export const InputWrapper = styled.div`
     height: ${heights.borderHeight}px;
     width: 100%;
     background-color: ${props =>
-      props.invalid ? typography.errorColor : typography.focusBorderColor};
+  props.invalid ? typography.errorColor : typography.focusBorderColor};
     box-shadow: ${props => props.invalid ? 'none' : `0 0 ${typography.focusBorderShadow}px ${typography.focusBorderColor}`};
     opacity: ${props => (props.focus ? 1 : 0)};
     transform: scaleX(${props => (props.focus ? 1 : 0)});
@@ -110,22 +110,27 @@ export const InputIcon = styled.div`
 export const InputLabel = styled.label`
   position: absolute;
   bottom: ${props =>
-    props.focus
-      ? indents.valueBottom + heights.valueHeight
-      : indents.valueBottom}px;
+  props.focus
+    ? indents.valueBottom + heights.valueHeight
+    : indents.valueBottom}px;
   width: 100%;
   height: ${props =>
-    props.focus ? heights.smallHeight : heights.valueHeight}px;
+  props.focus ? heights.smallHeight : heights.valueHeight}px;
   font-size: ${props =>
-    props.focus ? typography.smallFontSize : typography.valueFontSize}px;
+  props.focus ? typography.smallFontSize : typography.valueFontSize}px;
   line-height: ${props =>
-    props.focus ? typography.smallLineHeight : typography.valueLineHeight}px;
+  props.focus ? typography.smallLineHeight : typography.valueLineHeight}px;
   text-shadow: 0 0 ${typography.unFocusValueShadow}px ${typography.unFocusValueColor};
   text-transform: uppercase;
   color: ${typography.unFocusValueColor};
   transition: all ease-in-out 0.3s;
   cursor: text;
   z-index: 0;
+  
+  ${props => props.invalid && css`
+    color: ${typography.errorColor};
+    text-shadow: 0 0 ${typography.unFocusValueShadow}px ${typography.errorColor};
+  `}
 `;
 
 export const Input = styled.input`
