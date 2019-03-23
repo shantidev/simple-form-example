@@ -1,96 +1,122 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import connect from 'react-redux/es/connect/connect';
 import { bindActionCreators } from 'redux';
 import * as formModule from '../../store/modules/form';
+import { useCallbackState } from '../../helpers/useCallbackState';
 
 import FormComponent from '../../components/Form';
 
 const Form = props => {
   const { submitForm } = props;
 
-  const [fields, changeFields] = useState({
-    name: {
-      name: 'name',
-      value: '',
-    },
-    race: {
-      name: 'race',
-      value: '',
-    },
-    class: {
-      name: 'class',
-      value: '',
-    },
-    startWeapon: {
-      name: 'startWeapon',
-      value: '',
-    },
-    about: {
-      name: 'about',
-      value: '',
-    }
-  });
-
+  /* Set errors on fields */
   const [errors, getErrors] = useState({
     name: false,
     race: false,
-    class: false,
+    classes: false,
     startWeapon: false,
     about: false,
   });
 
-  const [submit, checkSubmit] = useState(false);
-
-  useEffect(() => {
-    if (submit) {
-      onValidate();
-    }
-  }, [fields]);
-
-  const onChange = (value, name) => {
-    changeFields({ ...fields, [name]: { ...fields[name], value }});
-  };
-
-  const onValidate = (field) => {
+  /* Form validation on submit */
+  const onValidateForm = () => {
     const invalids = {
-      name: fields.name.value.length === 0,
-      race: fields['race'].value.length === 0,
-      class: fields.class.value.length === 0,
-      startWeapon: fields.startWeapon.value.length === 0,
-      about: fields.about.value.length === 0,
+      name: name.value.length === 0,
+      race: race.value.length === 0,
+      classes: classes.value.length === 0,
+      startWeapon: startWeapon.value.length === 0,
+      about: about.value.length === 0,
     };
 
     const validForm = !invalids.name && !invalids.race && !invalids.class && !invalids.startWeapon && !invalids.about;
 
-    getErrors(field
-      ? { ...errors, [field]: invalids[field] }
-      : {...invalids}
+    getErrors({...invalids}
     );
 
     return validForm;
   };
 
-  const onSubmit = () => {
-    checkSubmit(true);
+  /* Validate field */
+  const onValidateField = (field) => {
+    getErrors({ ...errors, [field.name]: field.value.length === 0})
+  };
 
-    if (onValidate()) {
-      submitForm({
-        name: fields.name.value,
-        race: fields['race'].value,
-        class: fields.class.value,
-        startWeapon: fields.startWeapon.value,
-        about: fields.about.value,
-      })
-    } else {
-      alert('Invalid form')
+  /* Create fields state */
+  const [name, onChangeName] = useCallbackState({
+    name: 'name',
+    value: '',
+  }, () => onValidateField(name));
+
+  const [race, onChangeRace] = useCallbackState({
+    name: 'race',
+    value: '',
+  }, () => onValidateField(race));
+
+  const [classes, onChangeClasses] = useCallbackState({
+    name: 'classes',
+    value: '',
+  }, () => onValidateField(classes));
+
+  const [startWeapon, onChangeStartWeapon] = useCallbackState({
+    name: 'startWeapon',
+    value: '',
+  }, () => onValidateField(startWeapon));
+
+  const [about, onChangeAbout] = useCallbackState({
+    name: 'about',
+    value: '',
+  }, () => onValidateField(about));
+
+  /* OnChange functions of fields */
+  const changeName = (value) => onChangeName({...name, value});
+  const changeRace = (value) => onChangeRace({...race, value});
+  const changeClasses = (value) => onChangeClasses({...classes, value});
+  const changeStartWeapon = (value) => onChangeStartWeapon({...startWeapon, value});
+  const changeAbout = (value) => onChangeAbout({...about, value});
+
+  /* Submitting form */
+  const onSubmit = () => {
+    const form = {
+      name: name.value,
+      race: race.value,
+      classes: classes.value,
+      startWeapon: startWeapon.value,
+      about: about.value,
+    };
+
+    if (onValidateForm()) {
+      submitForm(form);
+      return;
     }
+
+    alert('Please enter valid values')
   };
 
   const form = {
-    fields,
+    fields: {
+      name: {
+        ...name,
+        onChange: changeName,
+      },
+      race: {
+        ...race,
+        onChange: changeRace,
+      },
+      classes: {
+        ...classes,
+        onChange: changeClasses,
+      },
+      startWeapon: {
+        ...startWeapon,
+        onChange: changeStartWeapon,
+      },
+      about: {
+        ...about,
+        onChange: changeAbout,
+      }
+    },
     errors,
-    onChange,
     onSubmit,
   };
 
