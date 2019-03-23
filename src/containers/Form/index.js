@@ -61,7 +61,7 @@ const Form = props => {
       about: fields.about.value.length === 0,
     };
 
-    const validForm = !invalids.name || !invalids.race || !invalids.class || !invalids.startWeapon || !invalids.about;
+    const validForm = !invalids.name && !invalids.race && !invalids.class && !invalids.startWeapon && !invalids.about;
 
     getErrors(field
       ? { ...errors, [field]: invalids[field] }
@@ -73,6 +73,7 @@ const Form = props => {
 
   const onSubmit = () => {
     checkSubmit(true);
+
     if (onValidate()) {
       submitForm({
         name: fields.name.value,
